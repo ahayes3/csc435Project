@@ -7,9 +7,14 @@ import javax.servlet.annotation.*;
 @WebServlet("/sayhello")   // Configure the request URL for this servlet (Tomcat 7/Servlet 3.0 upwards)
 public class HelloServlet extends HttpServlet {
 
+   @Override
+   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+      doPost(req,resp);
+   }
+
    // The doGet() runs once per HTTP GET request to this servlet.
    @Override
-   public void doGet(HttpServletRequest request, HttpServletResponse response)
+   public void doPost(HttpServletRequest request, HttpServletResponse response)
          throws IOException, ServletException {
  
       // Set the response MIME type of the response message
@@ -32,10 +37,5 @@ public class HelloServlet extends HttpServlet {
       out.println("<p>A Random Number: <strong>" + Math.random() + "</strong></p>");
       out.println("</body></html>");
       out.close();  // Always close the output writer
-   }
-
-   @Override
-   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
    }
 }

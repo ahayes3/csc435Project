@@ -15,7 +15,6 @@ public class EchoServlet extends HttpServlet {
       response.setContentType("text/html; charset=UTF-8");
       // Allocate a output writer to write the response message into the network socket
       PrintWriter out = response.getWriter();
- 
       // Write the response message, in an HTML page
       try {
          out.println("<!DOCTYPE html>");
@@ -127,6 +126,7 @@ public class EchoServlet extends HttpServlet {
    @Override
    public void doPost(HttpServletRequest request, HttpServletResponse response)
                throws IOException, ServletException {
+      System.out.println("DOPOST");
       doGet(request, response);
    }
  
