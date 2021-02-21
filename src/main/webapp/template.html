@@ -1,10 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <title>New Character</title>
 </head>
 <body>
+<form action="/create" method="post">
+    Name: <input type="text" name="name"></input>
+    Background: <input type="text" name="bg"></input>
+    Race: <input type="text" name="race"/>
+    <fieldset>
+        <legend>Abilities</legend>
+        Strength: <input type="number" name="str"/>
+        Dexterity: <input type="number" name="dex"/>
+        Constitution: <input type="number" name="con"/>
+        Intelligence: <input type="number" name="int"/>
+        Wisdom: <input type="number" name="wis"/>
+        Charisma: <input type="number" name="cha"/>
+    </fieldset>
+    <fieldset>
+        Armor Class: <input type="number" name="ac"/>
+        Initiative: <input type="number" name="init"/>
+        Speed: <input type="number" name="speed"/>
+        Hit Points Max: <input type="number" name="maxHP"/>
+    </fieldset>
+    Languages: <input type="text" name="languages"/>
+
+    <fieldset>
+        <legend>Skill proficiencies</legend>
+        <div>
+            <div id="skillProfs"></div>
+            <button type="button" onclick="plusSkill()">+</button>
+            <button type="button" onclick="minusSkill()">-</button>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Tool proficiencies</legend>
+        <div>
+            <div id="toolProfs"></div>
+            <button type="button" onclick="plusButton(1)">+</button>
+            <button type="button" onclick="minusButton(1)">-</button>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Items</legend>
+        <div>
+            <div id="items">
+            </div>
+            <button type="button" onclick="plusButton(2)">+</button>
+            <button type="button" onclick="minusButton(2)">-</button>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Features</legend>
+        <div>
+            <div id="features">
+            </div>
+            <button type="button" onclick="plusButton(3)">+</button>
+            <button type="button" onclick="minusButton(3)">-</button>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Classes</legend>
+        <div>
+            <div id="classes"></div>
+            <button type="button" onclick="plusClass()">+</button>
+            <button type="button" onclick="minusClass()">-</button>
+        </div>
+    </fieldset>
+    <input type="submit" value="Submit"/>
+</form>
 
 </body>
+<script>
+    var ctrs = {skillProfs: 0, toolProfs: 0, items: 0, features: 0, classes: 0};
+
+    function plusButton(a) {
+        switch (a) {
+            case 1:
+                document.getElementById("toolProfs").innerHTML += "<div id='tool" + ctrs.toolProfs + "'>Tool " + (ctrs.toolProfs + 1) + "<input type=\"text\" name=\"tool" + ctrs.toolProfs + "\"/></div>"
+                ctrs.toolProfs += 1
+                break;
+            case 2:
+                document.getElementById("items").innerHTML += "<div id='item" + ctrs.items + "'>Item " + (ctrs.items + 1) + "<input type=\"text\" name=\"item" + ctrs.items + "\"/></div>"
+                ctrs.items += 1
+                break;
+            case 3:
+                document.getElementById("features").innerHTML += "<div id='feature" + ctrs.features + "'>Feature " + (ctrs.features + 1) + "<input type=\"text\" name=\"feature" + ctrs.features + "\"/></div>"
+                ctrs.features += 1
+                break;
+        }
+    }
+
+    function minusButton(a) {
+        switch (a) {
+            case 1:
+                if(ctrs.toolProfs >0) {
+                    ctrs.toolProfs -= 1
+                }
+                document.getElementById("tool" + ctrs.toolProfs).remove()
+                break;
+            case 2:
+                if(ctrs.items >0) {
+                    ctrs.items -= 1;
+                }
+                document.getElementById("item" + ctrs.items).remove()
+                break;
+            case 3:
+                if(ctrs.features>0) {
+                    crts.features -= 1
+                }
+                document.getElementById("feature" + ctrs.features).remvoe
+                break;
+        }
+    }
+
+    function plusClass() {
+        document.getElementById("classes").innerHTML += "<div id='class" + ctrs.classes + "'><select name=\"class" + ctrs.classes + "\" >" +
+            "<option name='Artificer'>Artificer</option>" +
+            "<option name='Barbarian'>Barbarian</option>" +
+            "<option name='Bard'>Bard</option>" +
+            "<option name='Cleric'>Cleric</option>" +
+            "<option name='Druid'>Druid</option>" +
+            "<option name='Fighter'>Fighter</option>" +
+            "<option name='Monk'>Monk</option>" +
+            "<option name='Paladin'>Paladin</option>" +
+            "<option name='Ranger'>Ranger</option>" +
+            "<option name='Rogue'>Rogue</option>" +
+            "<option name='Sorcerer'>Sorcerer</option>" +
+            "<option name='Warlock'>Warlock</option>" +
+            "<option name='Wizard'>Wizard</option>" +
+            "</select><input style='width:2rem' type='number' name='" + ctrs.classes + "'</div>"
+        ctrs.classes += 1;
+    }
+
+    function minusClass() {
+        if (ctrs.classes > 0) {
+            ctrs.classes -= 1
+        }
+        console.log("class" + ctrs.classes)
+        document.getElementById("class" + ctrs.classes).remove()
+    }
+
+    function plusSkill() {
+        document.getElementById("skillProfs").innerHTML += "<div id='skill" + ctrs.skillProfs + "'><select name=\"Skill" + ctrs.skillProfs + "\" >" +
+            "<option name='Acrobatics'>Acrobatics</option>" +
+            "<option name='Animal Handling'>Animal Handling</option>" +
+            "<option name='Arcana'>Arcana</option>" +
+            "<option name='Athletics'>Athletics</option>" +
+            "<option name='Deception'>Deception</option>" +
+            "<option name='History'>History</option>" +
+            "<option name='Insight'>Insight</option>" +
+            "<option name='Intimidation'>Intimidation</option>" +
+            "<option name='Investigation'>Investigation</option>" +
+            "<option name='Medicine'>Medicine</option>" +
+            "<option name='Nature'>Nature</option>" +
+            "<option name='Perception'>Perception</option>" +
+            "<option name='Performance'>Performance</option>" +
+            "<option name='Persuasion'>Persuasion</option>" +
+            "<option name='Religion'>Religion</option>" +
+            "<option name='Sleight of Hand'>Sleight of Hand</option>" +
+            "<option name='Stealth'>Stealth</option>" +
+            "<option name='Survival'>Survival</option>" +
+            "</div>"
+        ctrs.skills += 1;
+    }
+
+    function minusSkill() {
+        if(ctrs.skillProfs>0) {
+            ctrs.skillProfs -= 1
+        }
+        document.getElementById("skill" + ctrs.skillProfs).remove()
+    }
+</script>
 </html>
