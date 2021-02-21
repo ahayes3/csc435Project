@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archive>
+    <dir sourceOnDisk="/home/andy/cs/csc435/liberty/characterSheets/src/main/webapp" targetInArchive="/"/>
+    <dir sourceOnDisk="/home/andy/cs/csc435/liberty/characterSheets/build/classes/java/main" targetInArchive="/WEB-INF/classes/"/>
+    <file sourceOnDisk="/home/andy/.gradle/caches/modules-2/files-2.1/org.mongodb/mongodb-driver/3.12.8/af943a4c31cee9138b3a903fa2473f42e789af6e/mongodb-driver-3.12.8.jar" targetInArchive="/WEB-INF/lib/mongodb-driver-3.12.8.jar"/>
+    <file sourceOnDisk="/home/andy/.gradle/caches/modules-2/files-2.1/jakarta.platform/jakarta.jakartaee-api/8.0.0/5983b3e05328aa17efa9a5ea91f3de474e60342f/jakarta.jakartaee-api-8.0.0.jar" targetInArchive="/WEB-INF/lib/jakarta.jakartaee-api-8.0.0.jar"/>
+    <file sourceOnDisk="/home/andy/.gradle/caches/modules-2/files-2.1/org.mongodb/mongodb-driver-core/3.12.8/1a47b7db2cfa7f46a6f1a754d7b2fc08b81188de/mongodb-driver-core-3.12.8.jar" targetInArchive="/WEB-INF/lib/mongodb-driver-core-3.12.8.jar"/>
+    <file sourceOnDisk="/home/andy/.gradle/caches/modules-2/files-2.1/org.mongodb/bson/3.12.8/9acbb4c39ccd43396504143851a6475282918031/bson-3.12.8.jar" targetInArchive="/WEB-INF/lib/bson-3.12.8.jar"/>
+    <file sourceOnDisk="/home/andy/cs/csc435/liberty/characterSheets/build/tmp/META-INF/MANIFEST.MF" targetInArchive="/META-INF/MANIFEST.MF"/>
+</archive>

@@ -1,0 +1,10 @@
+
+ Index  Count  Time of first Occurrence    Time of last Occurrence     Exception SourceId ProbeId
+------+------+---------------------------+---------------------------+---------------------------
+     0      4   2/21/21, 13:32:48:625 EST   2/21/21, 13:35:38:121 EST javax.servlet.ServletException com.ibm.ws.webcontainer.filter.WebAppFilterManager.invokeFilters 1064
+                                                                            - /home/andy/cs/csc435/liberty/characterSheets/build/wlp/usr/servers/CharacterSheetsServer/logs/ffdc/ffdc_21.02.21_13.32.48.0.log
+     1      1   2/21/21, 13:47:40:657 EST   2/21/21, 13:47:40:657 EST java.lang.IllegalStateException com.ibm.ws.webcontainer.filter.WebAppFilterManager.invokeFilters 1105
+                                                                            - /home/andy/cs/csc435/liberty/characterSheets/build/wlp/usr/servers/CharacterSheetsServer/logs/ffdc/ffdc_21.02.21_13.47.40.0.log
+     2      3   2/21/21, 13:48:33:115 EST   2/21/21, 13:48:41:723 EST java.lang.NullPointerException com.ibm.ws.webcontainer.filter.WebAppFilterManager.invokeFilters 1105
+                                                                            - /home/andy/cs/csc435/liberty/characterSheets/build/wlp/usr/servers/CharacterSheetsServer/logs/ffdc/ffdc_21.02.21_13.48.33.0.log
+------+------+---------------------------+---------------------------+---------------------------

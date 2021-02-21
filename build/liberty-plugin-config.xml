@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<liberty-plugin-config version="2.0">
+  <installDirectory>/home/andy/cs/csc435/liberty/characterSheets/build/wlp</installDirectory>
+  <servers>
+    <server>
+      <userDirectory>/home/andy/cs/csc435/liberty/characterSheets/build/wlp/usr</userDirectory>
+      <serverDirectory>/home/andy/cs/csc435/liberty/characterSheets/build/wlp/usr/servers/CharacterSheetsServer</serverDirectory>
+      <serverOutputDirectory>/home/andy/cs/csc435/liberty/characterSheets/build/wlp/usr/servers/CharacterSheetsServer</serverOutputDirectory>
+      <serverName>CharacterSheetsServer</serverName>
+      <configDirectory>/home/andy/cs/csc435/liberty/characterSheets/src/main/liberty/config</configDirectory>
+      <bootstrapProperties>
+        <default.https.port>9443</default.https.port>
+        <app.context.root>/</app.context.root>
+        <serverName>CharacterSheets</serverName>
+        <default.http.port>9080</default.http.port>
+      </bootstrapProperties>
+      <looseApplication>true</looseApplication>
+      <stripVersion>false</stripVersion>
+      <applications>
+        <application>
+          <appsDirectory>apps</appsDirectory>
+          <applicationFilename>CharacterSheets.war.xml</applicationFilename>
+          <warSourceDirectory>src/main/webapp</warSourceDirectory>
+          <projectType>war</projectType>
+        </application>
+      </applications>
+      <projectCompileDependency>org.mongodb:mongodb-driver:3.12.8</projectCompileDependency>
+    </server>
+  </servers>
+</liberty-plugin-config>

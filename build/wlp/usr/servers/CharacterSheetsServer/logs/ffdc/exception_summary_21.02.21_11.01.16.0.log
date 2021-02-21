@@ -1,0 +1,12 @@
+
+ Index  Count  Time of first Occurrence    Time of last Occurrence     Exception SourceId ProbeId
+------+------+---------------------------+---------------------------+---------------------------
+     0      1   2/21/21, 11:01:15:904 EST   2/21/21, 11:01:15:904 EST java.lang.NullPointerException com.ibm.ws.webcontainer.osgi.WebContainer createModuleMetaData
+                                                                            - /home/andy/cs/csc435/liberty/characterSheets/build/wlp/usr/servers/CharacterSheetsServer/logs/ffdc/ffdc_21.02.21_11.01.15.0.log
+     1      1   2/21/21, 11:01:16:488 EST   2/21/21, 11:01:16:488 EST com.ibm.ws.container.service.metadata.MetaDataException com.ibm.ws.app.manager.module.internal.SimpleDeployedAppInfoBase 535
+                                                                            - /home/andy/cs/csc435/liberty/characterSheets/build/wlp/usr/servers/CharacterSheetsServer/logs/ffdc/ffdc_21.02.21_11.01.16.0.log
+     2      1   2/21/21, 13:17:53:026 EST   2/21/21, 13:17:53:026 EST java.lang.NullPointerException com.ibm.ws.webcontainer.filter.WebAppFilterManager.invokeFilters 1105
+                                                                            - /home/andy/cs/csc435/liberty/characterSheets/build/wlp/usr/servers/CharacterSheetsServer/logs/ffdc/ffdc_21.02.21_13.17.53.0.log
+     3      6   2/21/21, 13:27:09:444 EST   2/21/21, 13:31:39:885 EST javax.servlet.ServletException com.ibm.ws.webcontainer.filter.WebAppFilterManager.invokeFilters 1064
+                                                                            - /home/andy/cs/csc435/liberty/characterSheets/build/wlp/usr/servers/CharacterSheetsServer/logs/ffdc/ffdc_21.02.21_13.27.09.0.log
+------+------+---------------------------+---------------------------+---------------------------
