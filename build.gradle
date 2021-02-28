@@ -10,7 +10,6 @@ buildscript {
 
 plugins {
 	id "io.openliberty.tools.gradle.Liberty" version "3.1.2"
-	id 'com.sourcemuse.mongo' version '1.0.7'
 	id 'war'
 	id 'java'
 }
@@ -21,7 +20,8 @@ repositories {
 
 dependencies {
 	implementation 'jakarta.platform:jakarta.jakartaee-api:8.0.0'
-	compile 'org.mongodb:mongodb-driver:3.12.8'
+	implementation 'mysql:mysql-connector-java:8.0.23'
+	compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
 }
 
 ext {
@@ -46,6 +46,3 @@ liberty {
 		//}
 	}
 }
-
-libertyCreate.dependsOn 'startMongoDb'
-libertyStop.dependsOn 'stopMongoDb'

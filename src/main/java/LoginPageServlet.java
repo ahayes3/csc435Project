@@ -14,8 +14,11 @@ import java.util.Scanner;
 public class LoginPageServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(req.getSession().getAttribute("user")!= null)
+        System.out.println("HERE");
+        if(req.getSession().getAttribute("user")!= null) {
+            System.out.println(req.getSession().getAttribute("user"));
             resp.sendRedirect("home");
+        }
         var writer = resp.getWriter();
         writer.println("<!DOCTYPE html>");
         writer.println("<html lang=\"en\"");
@@ -63,6 +66,7 @@ public class LoginPageServlet extends HttpServlet {
             rd.forward(req,resp);
         }
         s.close();
+        System.out.println("VALID LOGIN");
     }
 }
 

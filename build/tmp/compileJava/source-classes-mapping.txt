@@ -1,23 +1,19 @@
-CreateServlet.java
- CreateServlet
 Clazz.java
  Clazz
-LogoutServlet.java
- LogoutServlet
-EchoServlet.java
- EchoServlet
-LoginServlet.java
- LoginServlet
-HelloServlet.java
- HelloServlet
+HomeServlet.java
+ HomeServlet
+CharactersServlet.java
+ CharactersServlet
 LoginPageServlet.java
  LoginPageServlet
+LogoutServlet.java
+ LogoutServlet
+CharacterFilter.java
+ CharacterFilter
+Ability.java
+ Ability
 Character.java
  Character
  Character$1
  Character$2
  Character$Resource
-Ability.java
- Ability
-HomeServlet.java
- HomeServlet

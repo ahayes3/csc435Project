@@ -1,14 +1,16 @@
-Launching CharacterSheetsServer (Open Liberty 21.0.0.1/wlp-1.0.48.cl210120210113-1459) on OpenJDK 64-Bit Server VM, version 11.0.10+9 (en_US)
+Launching CharacterSheetsServer (Open Liberty 21.0.0.1/wlp-1.0.48.cl210120210113-1459) on OpenJDK 64-Bit Server VM, version 15.0.2+7 (en_US)
 [AUDIT   ] CWWKE0001I: The server CharacterSheetsServer has been launched.
-[AUDIT   ] CWWKG0093A: Processing configuration drop-ins resource: /home/andy/cs/csc435/liberty/characterSheets/build/wlp/usr/servers/CharacterSheetsServer/configDropins/defaults/install_apps_configuration_1491924271.xml
+[AUDIT   ] CWWKG0093A: Processing configuration drop-ins resource: /home/ahayes5/cs/csc435/csc435Project/build/wlp/usr/servers/CharacterSheetsServer/configDropins/defaults/install_apps_configuration_1491924271.xml
+[WARNING ] CWWKG0104W: The ID attribute with value ${serverName} for the configuration element webApplication must have a fixed value. Variables in the ID attribute will not be replaced.
 [AUDIT   ] CWWKZ0058I: Monitoring dropins for applications.
 [ERROR   ] CWWKZ0013E: It is not possible to start two applications called CharacterSheets.
-[AUDIT   ] CWWKT0016I: Web application available (default_host): http://andy-g55587.local:9080/
-[AUDIT   ] CWWKZ0001I: Application CharacterSheets started in 3.789 seconds.
+[AUDIT   ] CWWKT0016I: Web application available (default_host): http://andrew-pc.local:9080/
+[AUDIT   ] CWWKZ0001I: Application CharacterSheets started in 0.457 seconds.
 [AUDIT   ] CWWKF0012I: The server installed the following features: [servlet-4.0].
-[AUDIT   ] CWWKF0011I: The CharacterSheetsServer server is ready to run a smarter planet. The CharacterSheetsServer server started in 12.164 seconds.
-[AUDIT   ] CWWKE0055I: Server shutdown requested on Saturday, February 20, 2021 at 12:20 PM. The server CharacterSheetsServer is shutting down.
+[AUDIT   ] CWWKF0011I: The CharacterSheetsServer server is ready to run a smarter planet. The CharacterSheetsServer server started in 2.354 seconds.
+[WARNING ] SRVE0190E: File not found: /favicon.ico
+[AUDIT   ] CWWKE0055I: Server shutdown requested on Sunday, February 28, 2021 at 9:09 AM. The server CharacterSheetsServer is shutting down.
 [AUDIT   ] CWWKE1100I: Waiting for up to 30 seconds for the server to quiesce.
-[AUDIT   ] CWWKT0017I: Web application removed (default_host): http://andy-g55587.local:9080/
+[AUDIT   ] CWWKT0017I: Web application removed (default_host): http://andrew-pc.local:9080/
 [AUDIT   ] CWWKZ0009I: The application CharacterSheets has stopped successfully.
-[AUDIT   ] CWWKE0036I: The server CharacterSheetsServer stopped after 26.226 seconds.
+[AUDIT   ] CWWKE0036I: The server CharacterSheetsServer stopped after 18.807 seconds.
