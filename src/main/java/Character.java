@@ -10,6 +10,7 @@ public class Character {
         int max,current;
     }
     String name,background,race,languages;
+    HashMap<String,Integer> stats;
     int id;
     int str,dex,con,intel,wis,cha,ac,init,speed,maxHp,hp;
     ArrayList<Clazz> classes;
@@ -39,21 +40,22 @@ public class Character {
 
 
     public Character(String name,String background,String race,String languages,int str,int dex,int con,int intel,int wis,int cha, int ac,int init,int speed, int maxHp,ArrayList<String> skillProfs,ArrayList<String> toolProfs,ArrayList<String> items,ArrayList<String> features,ArrayList<Clazz> classes,int id) {
+        stats = new HashMap<>();
         this.name=name;
         this.background=background;
         this.race=race;
         this.languages=languages;
-        this.str = str;
-        this.dex=dex;
-        this.con=con;
-        this.intel = intel;
-        this.wis=wis;
-        this.cha=cha;
-        this.ac=ac;
-        this.init=init;
-        this.speed=speed;
-        this.maxHp=maxHp;
-        this.hp=maxHp;
+        stats.put("str",str);
+        stats.put("dex",dex);
+        stats.put("con",con);
+        stats.put("int",intel);
+        stats.put("wis",wis);
+        stats.put("cha",cha);
+        stats.put("ac",ac);
+        stats.put("init",init);
+        stats.put("speed",speed);
+        stats.put("maxHp",maxHp);
+        stats.put("hp",maxHp);
         this.skillProfs = skillProfs;
         this.toolProfs=toolProfs;
         this.items=items;

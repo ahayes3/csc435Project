@@ -30,7 +30,7 @@ public class CharactersServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("POST");
-        int str, dex, con, intel, wis, cha, ac, init, speed, maxHP;
+        int str, dex, con, intel, wis, cha, ac, init, speed, maxHp;
 
 //        var iter = req.getParameterNames();
 //        while (iter.hasMoreElements()) {
@@ -55,7 +55,7 @@ public class CharactersServlet extends HttpServlet {
         ac = Integer.parseInt(req.getParameter("ac"));
         init = Integer.parseInt(req.getParameter("init"));
         speed = Integer.parseInt(req.getParameter("speed"));
-        maxHP = Integer.parseInt(req.getParameter("maxHP"));
+        maxHp = Integer.parseInt(req.getParameter("maxHp"));
         Character c;
         try {
             c = new Character(req.getParameter("name"),
@@ -71,7 +71,7 @@ public class CharactersServlet extends HttpServlet {
                     ac,
                     init,
                     speed,
-                    maxHP,
+                    maxHp,
                     makeList(req, "skill"),
                     makeList(req, "tool"),
                     makeList(req, "item"),
@@ -104,7 +104,7 @@ public class CharactersServlet extends HttpServlet {
 
     }
 
-    private ArrayList<String> makeList(HttpServletRequest req, String name) {
+    public static ArrayList<String> makeList(HttpServletRequest req, String name) {
         ArrayList<String> out = new ArrayList<>();
         var iter = req.getParameterNames();
         while (iter.hasMoreElements()) {
@@ -116,7 +116,7 @@ public class CharactersServlet extends HttpServlet {
         return out;
     }
 
-    private ArrayList<Clazz> classesList(HttpServletRequest req) throws InvalidPropertyException {
+    public static ArrayList<Clazz> classesList(HttpServletRequest req) throws InvalidPropertyException {
         ArrayList<Clazz> out = new ArrayList<>();
         var iter = req.getParameterNames();
         while (iter.hasMoreElements()) {

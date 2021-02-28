@@ -1,19 +1,15 @@
 Clazz.java
  Clazz
-HomeServlet.java
- HomeServlet
 CharactersServlet.java
  CharactersServlet
 LoginPageServlet.java
  LoginPageServlet
-LogoutServlet.java
- LogoutServlet
-CharacterFilter.java
- CharacterFilter
-Ability.java
- Ability
 Character.java
  Character
  Character$1
  Character$2
  Character$Resource
+Ability.java
+ Ability
+CharacterFilter.java
+ CharacterFilter

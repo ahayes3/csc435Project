@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
-
+//Can be trimmed down
+//Will include better auth for viewing private/public sheets
+// and editing owned sheets
 @WebServlet("/loginPage")
 public class LoginPageServlet extends HttpServlet {
     @Override
