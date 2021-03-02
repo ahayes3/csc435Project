@@ -7,9 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.UUID;
 
 @WebFilter(urlPatterns = {"/characters/*"})
 public class CharacterFilter implements Filter {
@@ -20,15 +19,78 @@ public class CharacterFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         switch (req.getMethod()) {
-            case "POST" -> chain.doFilter(request, response);
+            case "POST" -> {
+                int str, dex, con, intel, wis, cha, ac, init, speed, maxHp;
+
+                str = Integer.parseInt(req.getParameter("str"));
+                dex = Integer.parseInt(req.getParameter("dex"));
+                con = Integer.parseInt(req.getParameter("con"));
+                intel = Integer.parseInt(req.getParameter("int"));
+                wis = Integer.parseInt(req.getParameter("wis"));
+                cha = Integer.parseInt(req.getParameter("cha"));
+                ac = Integer.parseInt(req.getParameter("ac"));
+                init = Integer.parseInt(req.getParameter("init"));
+                speed = Integer.parseInt(req.getParameter("speed"));
+                maxHp = Integer.parseInt(req.getParameter("maxHp"));
+                Character c;
+                try {
+                    UUID id = UUID.randomUUID();
+                    while (Characters.usedIds.contains(id)) {
+                        id = UUID.randomUUID();
+                    }
+                    Characters.usedIds.add(id);
+                    c = new Character(
+                            (String) req.getSession().getAttribute("user"),
+                            req.getParameter("name"),
+                            req.getParameter("bg"),
+                            req.getParameter("race"),
+                            req.getParameter("languages"),
+                            str,
+                            dex,
+                            con,
+                            intel,
+                            wis,
+                            cha,
+                            ac,
+                            init,
+                            speed,
+                            maxHp,
+                            makeList(req, "skill"),
+                            makeList(req, "tool"),
+                            makeList(req, "item"),
+                            makeList(req, "feature"),
+                            classesList(req),
+                            id
+                    );
+                    Characters.put(id,c);
+                } catch (InvalidPropertyException e) {
+                    throw new ServletException();
+                }
+                var session = req.getSession();
+                if (session.getAttribute("characters") == null) {
+                    session.setAttribute("characters", new ArrayList<Character>());
+                    ((ArrayList<Character>) session.getAttribute("characters")).add(c);
+                    System.out.println("LSIT CRREATED");
+                } else {
+                    ((ArrayList<Character>) session.getAttribute("characters")).add(c);
+                    System.out.println("ADDED TO LSIST");
+                }
+                //System.out.println(session.getAttribute("characters"));
+                resp.setContentType("application/json");
+                resp.setCharacterEncoding("UTF-8");
+                PrintWriter out = resp.getWriter();
+                out.print(gson.toJson(c));
+                out.flush();
+                out.close();
+            }
             case "PUT" -> {
-                int id = getId(req.getRequestURI());
+                UUID id = getId(req.getRequestURI(), resp);
                 ArrayList<Character> characters = (ArrayList<Character>) req.getSession().getAttribute("characters");
 
-                if (characters == null || characters.stream().noneMatch(p -> p.id == id))
+                if (characters == null || characters.stream().noneMatch(p -> p.id.equals(id)))
                     resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Character ID not found");
                 else {
-                    Character character = characters.stream().filter(p -> p.id == id).findFirst().get();
+                    Character character = characters.stream().filter(p -> p.id.equals(id)).findFirst().get();
 
                     var iter = req.getParameterNames().asIterator();
                     boolean classChanged = false;
@@ -57,6 +119,14 @@ public class CharacterFilter implements Filter {
                             }
 
 
+                        } else if (s.contains("skill")) {
+                            character.skillProfs.add(req.getParameter(s));
+                        } else if (s.contains("tool")) {
+                            character.toolProfs.add(req.getParameter(s));
+                        } else if (s.contains("item")) {
+                            character.items.add(req.getParameter(s));
+                        } else if (s.contains("feature")) {
+                            character.features.add(req.getParameter(s));
                         } else {
                             switch (s) {
 
@@ -77,77 +147,83 @@ public class CharacterFilter implements Filter {
                             }
                         }
                     }
-                    try {
-                        int str, dex, con, intel, wis, cha, ac, init, speed, maxHP;
-
-                        str = Integer.parseInt(req.getParameter("str"));
-                        dex = Integer.parseInt(req.getParameter("dex"));
-                        con = Integer.parseInt(req.getParameter("con"));
-                        intel = Integer.parseInt(req.getParameter("int"));
-                        wis = Integer.parseInt(req.getParameter("wis"));
-                        cha = Integer.parseInt(req.getParameter("cha"));
-                        ac = Integer.parseInt(req.getParameter("ac"));
-                        init = Integer.parseInt(req.getParameter("init"));
-                        speed = Integer.parseInt(req.getParameter("speed"));
-                        maxHP = Integer.parseInt(req.getParameter("maxHP"));
-                        character.name = req.getParameter("name");
-                        character.background = req.getParameter("bg");
-                        character.languages = req.getParameter("languages");
-                        character.str = str;
-                        character.dex = dex;
-                        character.con = con;
-                        character.intel = intel;
-                        character.wis = wis;
-                        character.cha = cha;
-                        character.ac = ac;
-                        character.init = init;
-                        character.speed = speed;
-                        character.maxHp = maxHP;
-                        character.skillProfs = CharactersServlet.makeList(req, "skill");
-                        character.toolProfs = CharactersServlet.makeList(req, "tool");
-                        character.items = CharactersServlet.makeList(req, "item");
-                        character.features = CharactersServlet.makeList(req, "feature");
-                    }
-                    catch(NumberFormatException e) {
-                        resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Values for stats must be numbers.");
-                    }
                 }
             }
             case "DELETE" -> {
-                int id = getId(req.getRequestURI());
-                ArrayList<Character> characters = (ArrayList<Character>) req.getSession().getAttribute("characters");
-                if (characters == null || characters.stream().noneMatch(p -> p.id == id))
-                    resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Character ID not found");
-            }
-            case "GET" -> {
-                ArrayList<Character> characters = (ArrayList<Character>) req.getSession().getAttribute("characters");
-                if (characters == null) {
-                    System.out.println("NO CHARACTERS FOUND");
-                    resp.sendError(HttpServletResponse.SC_NOT_FOUND);
-                    return;
-                } else {
-                    characters.forEach(p -> System.out.println(p.id));
-                }
+                UUID id = getId(req.getRequestURI(), resp);
 
-                int id = getId(req.getRequestURI());
-
-                if (characters.stream().anyMatch(p -> p.id == id)) {
-                    Character c = characters.stream().filter(p -> p.id == id).findFirst().get();
-                    resp.setContentType("application/json");
-                    resp.setCharacterEncoding("UTF-8");
+                if (req.getSession().getAttribute("user") == null) {
+                    resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+                } else if (Characters.contains(id) && Characters.get(id).owner.equals(req.getParameter("user"))) { //The one where it works
                     PrintWriter out = resp.getWriter();
-                    out.print(gson.toJson(c));
+                    Character c = Characters.remove(id);
+                    Characters.usedIds.remove(id);
+                    out.write(gson.toJson(c));
                     out.flush();
                     out.close();
+                } else if (Characters.contains(id)) {
+                    resp.sendError(HttpServletResponse.SC_FORBIDDEN);
+                } else {
+                    resp.sendError(HttpServletResponse.SC_NOT_FOUND);
                 }
             }
-
-
+            case "GET" -> {
+                PrintWriter out = resp.getWriter();
+                String uri = req.getRequestURI();
+                System.out.println(uri);
+                if (uri.equals("/characters")) {
+                    out.print(gson.toJson(Characters.list()));
+                } else {
+                    UUID id = getId(req.getRequestURI(), resp);
+                    if (Characters.contains(id))
+                        out.print(gson.toJson(Characters.get(id)));
+                    else
+                        resp.sendError(HttpServletResponse.SC_NOT_FOUND);
+                }
+                out.flush();
+                out.close();
+            }
         }
     }
 
-    public int getId(String uri) {
+    private UUID getId(String uri, HttpServletResponse resp) throws IOException {
         var split = uri.split("/");
-        return Integer.parseInt(split[split.length - 1]);
+        if (split.length > 2)
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+        return UUID.fromString(split[split.length - 1]);
+    }
+
+    private static ArrayList<String> makeList(HttpServletRequest req, String name) {
+        ArrayList<String> out = new ArrayList<>();
+        var iter = req.getParameterNames();
+        while (iter.hasMoreElements()) {
+            String a = iter.nextElement();
+            if (a.contains(name))
+                out.add(req.getParameter(a));
+
+        }
+        return out;
+    }
+
+    private static ArrayList<Clazz> classesList(HttpServletRequest req) throws InvalidPropertyException {
+        ArrayList<Clazz> out = new ArrayList<>();
+        var iter = req.getParameterNames();
+        while (iter.hasMoreElements()) {
+            String a = iter.nextElement();
+            int num = -1;
+            if (a.contains("class")) {
+                for (int i = 0; i < a.length(); i++) {
+                    if (a.charAt(i) >= 48 || a.charAt(i) <= 57) {
+                        num = i;
+                        break;
+                    }
+                }
+                if (num == -1) {
+                    throw new InvalidPropertyException("");
+                }
+                out.add(new Clazz(req.getParameter(a), Integer.parseInt(req.getParameter("level"+num))));
+            }
+        }
+        return out;
     }
 }
