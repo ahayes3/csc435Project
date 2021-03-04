@@ -29,8 +29,8 @@ public class LoginPageServlet extends HttpServlet {
         }
     }
 
-    @Override //CREATE ACCOUNT and login to it\
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    @Override // create account
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         File file = new File("users.txt");
         if(req.getSession().getAttribute("user")!= null) {
             resp.sendError(HttpServletResponse.SC_EXPECTATION_FAILED);
@@ -40,7 +40,7 @@ public class LoginPageServlet extends HttpServlet {
 
         Scanner s = new Scanner(file);
         int i=0;
-        while(s.hasNext()) {
+        while(s.hasNextLine()) {
             if(s.nextLine().equals(user) && i%2==0) {
                 resp.sendError(HttpServletResponse.SC_CONFLICT,"Username "+ user+" already exists.");
                 return;
@@ -51,39 +51,32 @@ public class LoginPageServlet extends HttpServlet {
         f.append(user).append('\n');
         f.append(pass).append('\n');
         req.getSession().setAttribute("user",user);
+        f.flush();
+        f.close();
+
+        s.close();
     }
 
-    @Override  //LOGIN TO ACOUNT
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    @Override  //login
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         if(req.getSession().getAttribute("user")!= null) {
             resp.sendError(HttpServletResponse.SC_EXPECTATION_FAILED);
         }
         String user = req.getParameter("user");
         String pass =req.getParameter("pass");
-
-
-
-//        if(req.getSession().getAttribute("user")!= null)
-//            resp.sendRedirect("home");
-//        if(!Files.exists(Path.of("users.txt")))
-//            Files.createFile(Path.of("users.txt")); //temporary
-//        File file = new File("users.txt");
-//        Scanner s = new Scanner(file);
-//        while(s.hasNext()) {
-//            if(s.nextLine().equals(req.getParameter("username")))
-//                break;
-//        }
-//        if(s.hasNext() && s.nextLine().equals(req.getParameter("password"))) {
-//            req.getSession().setAttribute("user",req.getParameter("username"));
-//            resp.sendRedirect("home");
-//        }
-//        else {
-//            RequestDispatcher rd = req.getRequestDispatcher("loginPage");
-//            req.setAttribute("valid","false");
-//            rd.forward(req,resp);
-//        }
-//        s.close();
-        System.out.println("VALID LOGIN");
+        Scanner s = new Scanner(new File("users.txt"));
+        while(s.hasNextLine()) {
+            String line = s.nextLine();
+            if(line.equals(user) && s.nextLine().equals(pass)) {
+                req.getSession().setAttribute("user",user);
+                System.out.println("Valid login");
+                return;
+            }
+            else {
+                resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+            }
+        }
+        resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
     }
 }
 

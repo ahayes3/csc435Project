@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><!--HTTP server plugin config file for CharacterSheetsServer generated on 2021.03.02 at 18:42:25 EST-->
-<Config ASDisableNagle="false" AcceptAllContent="false" AppServerPortPreference="HostHeader" ChunkedResponse="false" ConfigHash="1481807037" FIPSEnable="false" IISDisableNagle="false" IISPluginPriority="High" IgnoreDNSFailures="false" RefreshInterval="60" ResponseChunkSize="64" SSLConsolidate="false" TrustedProxyEnable="false" VHostMatchingCompat="false">
+<?xml version="1.0" encoding="UTF-8"?><!--HTTP server plugin config file for CharacterSheetsServer generated on 2021.03.03 at 23:01:25 EST-->
+<Config ASDisableNagle="false" AcceptAllContent="false" AppServerPortPreference="HostHeader" ChunkedResponse="false" ConfigHash="-1493662426" FIPSEnable="false" IISDisableNagle="false" IISPluginPriority="High" IgnoreDNSFailures="false" RefreshInterval="60" ResponseChunkSize="64" SSLConsolidate="false" TrustedProxyEnable="false" VHostMatchingCompat="false">
        
     <Log LogLevel="Error" Name="/opt/IBM/WebSphere/Plugins/logs/webserver1/http_plugin.log"/>
        
@@ -13,8 +13,18 @@
        
     <Property Name="PluginInstallRoot" Value="/opt/IBM/WebSphere/Plugins"/>
     <!-- Configuration generated using httpEndpointRef=defaultHttpEndpoint-->
-    <!-- No Virtual Hosts were found, possibly because no applications are defined. 
-	 Verify that at least one application is defined in the server configuration. -->
+    <!-- The default_host contained only aliases for endpoint defaultHttpEndpoint.
+	 The generated VirtualHostGroup will contain only configured web server ports:
+		webserverPort=80
+		webserverSecurePort=443 -->
+       
+    <VirtualHostGroup Name="default_host">
+              
+        <VirtualHost Name="*:80"/>
+              
+        <VirtualHost Name="*:443"/>
+           
+    </VirtualHostGroup>
        
     <ServerCluster CloneSeparatorChange="false" GetDWLMTable="false" IgnoreAffinityRequests="true" LoadBalance="Round Robin" Name="CharacterSheetsServer_default_node_Cluster" PostBufferSize="0" PostSizeLimit="-1" RemoveSpecialHeaders="true" RetryInterval="60" ServerIOTimeoutRetry="-1">
               
@@ -39,5 +49,13 @@
         </PrimaryServers>
            
     </ServerCluster>
+       
+    <UriGroup Name="default_host_CharacterSheetsServer_default_node_Cluster_URIs">
+              
+        <Uri AffinityCookie="JSESSIONID" AffinityURLIdentifier="jsessionid" Name="/*"/>
+           
+    </UriGroup>
+       
+    <Route ServerCluster="CharacterSheetsServer_default_node_Cluster" UriGroup="default_host_CharacterSheetsServer_default_node_Cluster_URIs" VirtualHostGroup="default_host"/>
     
 </Config>
