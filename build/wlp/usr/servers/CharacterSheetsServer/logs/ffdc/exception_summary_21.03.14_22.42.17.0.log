@@ -1,0 +1,8 @@
+
+ Index  Count  Time of first Occurrence    Time of last Occurrence     Exception SourceId ProbeId
+------+------+---------------------------+---------------------------+---------------------------
+     0      1   3/14/21, 22:42:17:394 EDT   3/14/21, 22:42:17:394 EDT java.io.FileNotFoundException com.ibm.ws.kernel.feature.internal.subsystem.KernelFeatureDefinitionImpl 165
+                                                                            - /home/ahayes5/cs/csc435/csc435Project/build/wlp/usr/servers/CharacterSheetsServer/logs/ffdc/ffdc_21.03.14_22.42.17.0.log
+     1      1   3/14/21, 22:42:17:397 EDT   3/14/21, 22:42:17:397 EDT java.io.FileNotFoundException com.ibm.ws.webcontainer.osgi.mbeans.PluginGenerator generateXML
+
+------+------+---------------------------+---------------------------+---------------------------

@@ -1,11 +1,12 @@
 import javax.resource.spi.InvalidPropertyException;
+import java.util.InvalidPropertiesFormatException;
 
 public class Clazz {
     String name;
     int hitDie;
     int level;
     boolean[] savingThrows;
-    public Clazz(String name,int level) throws InvalidPropertyException {
+    public Clazz(String name,int level) throws InvalidPropertiesFormatException {
         switch(name) {
             case "Artificer":
                 this.name = "Artificer";
@@ -74,7 +75,7 @@ public class Clazz {
                 break;
             default:
                 System.out.println("INVALID CLASS");
-                throw new InvalidPropertyException("Class " + name + " not found");
+                throw new InvalidPropertiesFormatException("Class " + name + " not found");
 
         }
         this.level=level;

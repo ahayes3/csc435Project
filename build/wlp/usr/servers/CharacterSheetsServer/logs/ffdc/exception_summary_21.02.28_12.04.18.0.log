@@ -1,8 +1,0 @@
-
- Index  Count  Time of first Occurrence    Time of last Occurrence     Exception SourceId ProbeId
-------+------+---------------------------+---------------------------+---------------------------
-     0     10   2/28/21, 12:04:18:829 EST   2/28/21, 12:18:39:384 EST java.lang.NumberFormatException com.ibm.ws.webcontainer.filter.WebAppFilterManager.invokeFilters 1105
-                                                                            - /home/ahayes5/cs/csc435/csc435Project/build/wlp/usr/servers/CharacterSheetsServer/logs/ffdc/ffdc_21.02.28_12.04.18.0.log
-                                                                            - /home/ahayes5/cs/csc435/csc435Project/build/wlp/usr/servers/CharacterSheetsServer/logs/ffdc/ffdc_21.02.28_12.04.37.0.log
-                                                                            - /home/ahayes5/cs/csc435/csc435Project/build/wlp/usr/servers/CharacterSheetsServer/logs/ffdc/ffdc_21.02.28_12.18.39.0.log
-------+------+---------------------------+---------------------------+---------------------------

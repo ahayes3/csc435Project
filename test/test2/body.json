@@ -1,0 +1,31 @@
+{
+	"character": {
+		"name": "Jeff",
+		"background": "outlaw",
+		"race": "elf",
+		"languages": "Common, Elvish",
+		"str": 10,
+		"dex": 11,
+		"con": 12,
+		"int": 13,
+		"wis": 14,
+		"cha": 15,
+		"ac": 14,
+		"init": 0,
+		"speed": 30,
+		"maxHp": 13,
+		"skills": ["Persuasion", "Perception"],
+		"tools": ["Thieves' tools"],
+		"features": ["FEATURE 1", "FEATURE 2"],
+		"items": ["dagger", "spoon", "ruby"],
+		"classes": [
+			{
+				"name": "fighter",
+			 	"level": 1
+			},
+			{
+				"name": "rogue",
+				"level": 2
+			}]
+	}
+}
