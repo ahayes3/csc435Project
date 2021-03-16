@@ -1,0 +1,216 @@
+------Start of DE processing------ = [3/14/21, 23:45:42:684 EDT]
+Exception = java.lang.RuntimeException
+Source = org.eclipse.osgi-3.15.0.cl210220210209-1100
+probeid = log
+Stack Dump = java.lang.RuntimeException: Could not create bundle file.
+	at org.eclipse.osgi.storage.Storage.createBundleFile(Storage.java:1147)
+	at org.eclipse.osgi.storage.BundleInfo$Generation.getBundleFile(BundleInfo.java:104)
+	at org.eclipse.osgi.storage.BundleInfo$Generation.getRawHeaders(BundleInfo.java:130)
+	at org.eclipse.osgi.storage.BundleInfo$CachedManifest.get(BundleInfo.java:599)
+	at org.eclipse.osgi.storage.BundleInfo$CachedManifest.get(BundleInfo.java:1)
+	at com.ibm.ws.logging.internal.BundleManifest.<init>(BundleManifest.java:35)
+	at com.ibm.ws.logging.internal.PackageProcessor.harvestPackageList(PackageProcessor.java:186)
+	at com.ibm.ws.logging.internal.PackageProcessor.populatePackageLists(PackageProcessor.java:166)
+	at com.ibm.ws.logging.internal.PackageProcessor.addingBundle(PackageProcessor.java:357)
+	at org.osgi.util.tracker.BundleTracker$Tracked.customizerAdding(BundleTracker.java:475)
+	at org.osgi.util.tracker.BundleTracker$Tracked.customizerAdding(BundleTracker.java:1)
+	at org.osgi.util.tracker.AbstractTracked.trackAdding(AbstractTracked.java:256)
+	at org.osgi.util.tracker.AbstractTracked.trackInitial(AbstractTracked.java:183)
+	at org.osgi.util.tracker.BundleTracker.open(BundleTracker.java:159)
+	at com.ibm.ws.logging.internal.PackageProcessor$1.run(PackageProcessor.java:79)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:312)
+	at com.ibm.ws.logging.internal.PackageProcessor.getPackageProcessor(PackageProcessor.java:64)
+	at com.ibm.websphere.ras.TruncatableThrowable.<init>(TruncatableThrowable.java:47)
+	at com.ibm.websphere.ras.TruncatableThrowable.<init>(TruncatableThrowable.java:50)
+	at com.ibm.ws.logging.internal.impl.BaseTraceFormatter.formatMessage(BaseTraceFormatter.java:290)
+	at com.ibm.ws.logging.internal.impl.BaseTraceFormatter.formatMessage(BaseTraceFormatter.java:237)
+	at com.ibm.ws.logging.internal.impl.BaseTraceService.publishLogRecord(BaseTraceService.java:983)
+	at com.ibm.ws.logging.internal.impl.BaseTraceService.error(BaseTraceService.java:715)
+	at com.ibm.websphere.ras.Tr.error(Tr.java:525)
+	at com.ibm.ws.logging.internal.osgi.TrOSGiLogForwarder.logged(TrOSGiLogForwarder.java:158)
+	at org.eclipse.osgi.internal.log.ExtendedLogReaderServiceFactory.safeLogged(ExtendedLogReaderServiceFactory.java:110)
+	at org.eclipse.osgi.internal.log.ExtendedLogReaderServiceFactory.logPrivileged(ExtendedLogReaderServiceFactory.java:253)
+	at org.eclipse.osgi.internal.log.ExtendedLogReaderServiceFactory.log(ExtendedLogReaderServiceFactory.java:225)
+	at org.eclipse.osgi.internal.log.ExtendedLogServiceFactory.log(ExtendedLogServiceFactory.java:102)
+	at org.eclipse.osgi.internal.log.LoggerImpl.log(LoggerImpl.java:88)
+	at org.eclipse.osgi.internal.log.LogServiceManager.frameworkEvent(LogServiceManager.java:185)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.dispatchEvent(BundleContextImpl.java:997)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+Caused by: java.io.IOException: The file "/home/ahayes5/cs/csc435/csc435Project/build/wlp/lib/com.ibm.ws.org.jboss.jandex_1.0.49.jar" does not exist
+	at org.eclipse.osgi.storage.bundlefile.ZipBundleFile.<init>(ZipBundleFile.java:43)
+	at org.eclipse.osgi.storage.Storage.createBundleFile(Storage.java:1144)
+	... 33 more
+
+Dump of callerThis
+Object type = org.eclipse.osgi.internal.log.ExtendedLogEntryImpl
+  nextSequenceNumber = 2
+  nextThreadId = 1
+  threadIds = null
+  loggerName = "Events.Framework.org.eclipse.osgi"
+  bundle = class org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle@60129b9a
+    initListeners = class java.util.ArrayList@677babbf
+      serialVersionUID = "/* Could not access serialVersionUID */"
+      DEFAULT_CAPACITY = "/* Could not access DEFAULT_CAPACITY */"
+      EMPTY_ELEMENTDATA = "/* Could not access EMPTY_ELEMENTDATA */"
+      DEFAULTCAPACITY_EMPTY_ELEMENTDATA = "/* Could not access DEFAULTCAPACITY_EMPTY_ELEMENTDATA */"
+      elementData = "/* Could not access elementData */"
+      size = "/* Could not access size */"
+      modCount = "/* Could not access modCount */"
+    equinoxContainer = class org.eclipse.osgi.internal.framework.EquinoxContainer@5d76848a
+      NAME = "org.eclipse.osgi"
+      secureAction = class org.eclipse.osgi.framework.util.SecureAction@6ed3f570
+      equinoxConfig = class org.eclipse.osgi.internal.framework.EquinoxConfiguration@a29ae50
+      logServices = class org.eclipse.osgi.internal.log.EquinoxLogServices@1d6ae283
+      storage = class org.eclipse.osgi.storage.Storage@568dabf6
+      packageAdmin = class org.eclipse.osgi.internal.framework.legacy.PackageAdminImpl@2704bc22
+      startLevel = class org.eclipse.osgi.internal.framework.legacy.StartLevelImpl@6098cdbc
+      bootDelegation = class java.util.HashSet@2a2c55d6
+      bootDelegationStems = class java.lang.String[12]
+      bootDelegateAll = false
+      isProcessClassRecursionSupportedByAll = false
+      eventPublisher = class org.eclipse.osgi.internal.framework.EquinoxEventPublisher@13a2c2d8
+      monitor = class java.lang.Object@3571083d
+      bootLoader = class jdk.internal.loader.ClassLoaders$PlatformClassLoader@7dbb79a0
+      serviceRegistry = class org.eclipse.osgi.internal.serviceregistry.ServiceRegistry@40888100
+      contextFinder = class org.eclipse.osgi.internal.framework.ContextFinder@4e423aa2
+      signedContentFactory = class org.osgi.util.tracker.ServiceTracker@45b93fcb
+      executor = class java.util.concurrent.ScheduledThreadPoolExecutor@78b4f7a1
+      storageSaver = class org.eclipse.osgi.internal.framework.StorageSaver@5ee4e76e
+    module = class org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule@5ce741cd
+      this$1 = class org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle@60129b9a
+      forStop = class java.util.concurrent.atomic.AtomicReference@7d3457f2
+      $SWITCH_TABLE$org$eclipse$osgi$container$Module$State = null
+      ACTIVE_SET = class java.util.RegularEnumSet@6eb9cad9
+      RESOLVED_SET = class java.util.RegularEnumSet@3fe9df44
+      id = 0
+      location = "System Bundle"
+      revisions = class org.eclipse.osgi.container.ModuleRevisions@58b34df7
+      stateChangeLock = class org.eclipse.osgi.internal.container.EquinoxReentrantLock@4ef75b08
+      stateTransitionEvents = class java.util.RegularEnumSet@64cc965a
+      settings = class java.util.RegularEnumSet@3b18c6f6
+      inStart = class java.util.concurrent.atomic.AtomicInteger@7986f897
+      state = class org.eclipse.osgi.container.Module$State@44317047
+      startlevel = 0
+      lastModified = 1615779942679
+      VALID_RESOLVED_TRANSITION = class java.util.RegularEnumSet@7a42b1f8
+      VALID_STOPPED_TRANSITION = class java.util.RegularEnumSet@40e65ae8
+      $SWITCH_TABLE$org$eclipse$osgi$container$ModuleContainerAdaptor$ModuleEvent = {1,2,3,4,5,6,7,8,9,10} /* array length = 10 */
+    monitor = class java.lang.Object@4e56a8de
+    context = class org.eclipse.osgi.internal.framework.BundleContextImpl@5c44c582
+      findHookName = "org.osgi.framework.hooks.bundle.FindHook"
+      valid = true
+      bundle = class org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle@60129b9a
+      container = class org.eclipse.osgi.internal.framework.EquinoxContainer@5d76848a
+      debug = class org.eclipse.osgi.internal.debug.Debug@340c88ae
+      servicesInUse = class java.util.HashMap@44426c97
+      activator = class org.eclipse.osgi.internal.framework.SystemBundleActivator@4d610f3c
+      contextLock = class java.lang.Object@50a03e3c
+    signerInfos = null
+    $SWITCH_TABLE$org$eclipse$osgi$container$Module$State = {1,2,3,4,5,6,7} /* array length = 7 */
+  level = 1
+  logLevelEnum = class org.osgi.service.log.LogLevel@b9ebac
+    AUDIT = class org.osgi.service.log.LogLevel@4738bda
+      AUDIT = class org.osgi.service.log.LogLevel@4738bda
+      ERROR = class org.osgi.service.log.LogLevel@b9ebac
+      WARN = class org.osgi.service.log.LogLevel@5d68547e
+      INFO = class org.osgi.service.log.LogLevel@124320f4
+      DEBUG = class org.osgi.service.log.LogLevel@719a8704
+      TRACE = class org.osgi.service.log.LogLevel@692fefb6
+      ENUM$VALUES = class org.osgi.service.log.LogLevel[6]
+      name = "/* Could not access name */"
+      ordinal = "/* Could not access ordinal */"
+    ERROR = class org.osgi.service.log.LogLevel@b9ebac
+    WARN = class org.osgi.service.log.LogLevel@5d68547e
+      AUDIT = class org.osgi.service.log.LogLevel@4738bda
+      ERROR = class org.osgi.service.log.LogLevel@b9ebac
+      WARN = class org.osgi.service.log.LogLevel@5d68547e
+      INFO = class org.osgi.service.log.LogLevel@124320f4
+      DEBUG = class org.osgi.service.log.LogLevel@719a8704
+      TRACE = class org.osgi.service.log.LogLevel@692fefb6
+      ENUM$VALUES = class org.osgi.service.log.LogLevel[6]
+      name = "/* Could not access name */"
+      ordinal = "/* Could not access ordinal */"
+    INFO = class org.osgi.service.log.LogLevel@124320f4
+      AUDIT = class org.osgi.service.log.LogLevel@4738bda
+      ERROR = class org.osgi.service.log.LogLevel@b9ebac
+      WARN = class org.osgi.service.log.LogLevel@5d68547e
+      INFO = class org.osgi.service.log.LogLevel@124320f4
+      DEBUG = class org.osgi.service.log.LogLevel@719a8704
+      TRACE = class org.osgi.service.log.LogLevel@692fefb6
+      ENUM$VALUES = class org.osgi.service.log.LogLevel[6]
+      name = "/* Could not access name */"
+      ordinal = "/* Could not access ordinal */"
+    DEBUG = class org.osgi.service.log.LogLevel@719a8704
+      AUDIT = class org.osgi.service.log.LogLevel@4738bda
+      ERROR = class org.osgi.service.log.LogLevel@b9ebac
+      WARN = class org.osgi.service.log.LogLevel@5d68547e
+      INFO = class org.osgi.service.log.LogLevel@124320f4
+      DEBUG = class org.osgi.service.log.LogLevel@719a8704
+      TRACE = class org.osgi.service.log.LogLevel@692fefb6
+      ENUM$VALUES = class org.osgi.service.log.LogLevel[6]
+      name = "/* Could not access name */"
+      ordinal = "/* Could not access ordinal */"
+    TRACE = class org.osgi.service.log.LogLevel@692fefb6
+      AUDIT = class org.osgi.service.log.LogLevel@4738bda
+      ERROR = class org.osgi.service.log.LogLevel@b9ebac
+      WARN = class org.osgi.service.log.LogLevel@5d68547e
+      INFO = class org.osgi.service.log.LogLevel@124320f4
+      DEBUG = class org.osgi.service.log.LogLevel@719a8704
+      TRACE = class org.osgi.service.log.LogLevel@692fefb6
+      ENUM$VALUES = class org.osgi.service.log.LogLevel[6]
+      name = "/* Could not access name */"
+      ordinal = "/* Could not access ordinal */"
+    ENUM$VALUES = class org.osgi.service.log.LogLevel[6]
+      LogLevel[0] = class org.osgi.service.log.LogLevel@4738bda
+      LogLevel[1] = class org.osgi.service.log.LogLevel@b9ebac
+      LogLevel[2] = class org.osgi.service.log.LogLevel@5d68547e
+      LogLevel[3] = class org.osgi.service.log.LogLevel@124320f4
+      LogLevel[4] = class org.osgi.service.log.LogLevel@719a8704
+      LogLevel[5] = class org.osgi.service.log.LogLevel@692fefb6
+    name = "/* Could not access name */"
+    ordinal = "/* Could not access ordinal */"
+  message = "FrameworkEvent ERROR"
+  ref = null
+  throwable = class java.lang.RuntimeException@5a73efd8
+    serialVersionUID = "/* Could not access serialVersionUID */"
+    serialVersionUID = "/* Could not access serialVersionUID */"
+    serialVersionUID = "/* Could not access serialVersionUID */"
+    backtrace = "/* Could not access backtrace */"
+    detailMessage = "/* Could not access detailMessage */"
+    UNASSIGNED_STACK = "/* Could not access UNASSIGNED_STACK */"
+    cause = "/* Could not access cause */"
+    stackTrace = "/* Could not access stackTrace */"
+    depth = "/* Could not access depth */"
+    SUPPRESSED_SENTINEL = "/* Could not access SUPPRESSED_SENTINEL */"
+    suppressedExceptions = "/* Could not access suppressedExceptions */"
+    NULL_CAUSE_MESSAGE = "/* Could not access NULL_CAUSE_MESSAGE */"
+    SELF_SUPPRESSION_MESSAGE = "/* Could not access SELF_SUPPRESSION_MESSAGE */"
+    CAUSE_CAPTION = "/* Could not access CAUSE_CAPTION */"
+    SUPPRESSED_CAPTION = "/* Could not access SUPPRESSED_CAPTION */"
+    EMPTY_THROWABLE_ARRAY = "/* Could not access EMPTY_THROWABLE_ARRAY */"
+    $assertionsDisabled = "/* Could not access $assertionsDisabled */"
+  contextObject = class org.osgi.framework.FrameworkEvent@7e03a727
+    serialVersionUID = 207051004521261705
+    bundle = class org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle@60129b9a
+    throwable = class java.lang.RuntimeException@5a73efd8
+    type = 2
+    STARTED = 1
+    ERROR = 2
+    PACKAGES_REFRESHED = 4
+    STARTLEVEL_CHANGED = 8
+    WARNING = 16
+    INFO = 32
+    STOPPED = 64
+    STOPPED_UPDATE = 128
+    STOPPED_BOOTCLASSPATH_MODIFIED = 256
+    WAIT_TIMEDOUT = 512
+    STOPPED_SYSTEM_REFRESHED = 1024
+    serialVersionUID = "/* Could not access serialVersionUID */"
+    source = "/* Could not access source */"
+  time = 1615779942680
+  threadId = 22
+  threadName = "Framework Event Dispatcher: Equinox Container: 1ba92e8c-7bcd-4964-94fb-d61e6061b076"
+  sequenceNumber = 1
+  stackTraceElement = null
+
