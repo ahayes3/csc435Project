@@ -1,5 +1,3 @@
-import com.google.gson.annotations.SerializedName;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
@@ -120,5 +118,4 @@ public class Character {
         return mod;
 
     }
-
 }
