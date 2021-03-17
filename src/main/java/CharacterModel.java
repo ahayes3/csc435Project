@@ -87,6 +87,69 @@ public class CharacterModel {
         con.close();
 
     }
+
+    public static void put(UUID id, Character c) throws SQLException{
+        Connection con = connect();
+        Statement st = con.createStatement();
+        String query1 = "DELETE FROM character_classes" +
+                " WHERE id='"+id+"'";
+        String query2 = "DELETE FROM character_features"+
+                " WHERE id='"+id+"'";
+        String query3 = "DELETE FROM character_items"+
+                " WHERE id='"+id+"'";
+        String query4 = "DELETE FROM character_skills"+
+                " WHERE id='"+id+"'";
+        String query5 = "DELETE FROM character_tools"+
+                " WHERE id='"+id+"'";
+        st.executeQuery(query1);
+        st.executeQuery(query2);
+        st.executeQuery(query3);
+        st.executeQuery(query4);
+        st.executeQuery(query5);
+
+        String query6 = "UPDATE characters" +
+                " SET name='"+c.name+"',"+
+                " SET background='"+c.background+"',"+
+                " SET race='"+c.race+"',"+
+                " SET languages='"+c.languages+"',"+
+                " SET str='"+c.stats.get("str")+"',"+
+                " SET dex='"+c.stats.get("dex")+"',"+
+                " SET con='"+c.stats.get("con")+"',"+
+                " SET wis='"+c.stats.get("wis")+"',"+
+                " SET intel='"+c.stats.get("int")+"',"+
+                " SET cha='"+c.stats.get("ac")+"',"+
+                " SET ac='"+c.stats.get("init")+"',"+
+                " SET init='"+c.stats.get("speed")+"',"+
+                " SET str='"+c.stats.get("maxHp")+"')" +
+                " WHERE id='"+c.id+"'";
+        st.executeQuery(query6);
+
+        for(String f:c.features) {
+            String q1 = "INSERT IGNORE INTO character_features(id,feature) VALUES(" +
+                    "'" + c.id + "','" +f+"')";
+            st.executeQuery(q1).close();
+        }
+        for(String i:c.items) {
+            String q2 = "INSERT IGNORE INTO character_items(id,item) VALUES (" +
+                    "'"+c.id+"','"+i+"')";
+            st.executeQuery(q2).close();
+        }
+        for(String s:c.skillProfs) {
+            String q3 = "INSERT IGNORE INTO character_features(id,skill) VALUES (" +
+                    "'"+c.id+"','"+s+"')";
+            st.executeQuery(q3).close();
+        }
+        for(String t:c.toolProfs) {
+            String q4 = "INSERT IGNORE INTO character_tools(id,tool) VALUES (" +
+                    "'"+c.id+"','"+t+"')";
+            st.executeQuery(q4).close();
+        }
+        for(Clazz cl:c.classes) {
+            String q5 = "INSERT IGNORE INTO character_classes(id,classe_name,level) VALUES (" +
+                    "'"+c.id+"','"+cl.name+"','"+cl.level+"')";
+            st.executeQuery(q5).close();
+        }
+    }
     public static Set<UUID> usedIds() throws SQLException{
         Connection con  = connect();
         Statement st = con.createStatement();

@@ -95,18 +95,27 @@ public class CharacterController implements Filter {
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                     resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    return;
                 }
 
                 CharacterView.respond(c,resp);
             }
             case "PUT" -> {
                 UUID id = getId(req.getRequestURI(), resp);
-                ArrayList<Character> characters = (ArrayList<Character>) req.getSession().getAttribute("characters");
-
-                if (characters == null || characters.stream().noneMatch(p -> p.id.equals(id)))
+                Set<UUID> ids=null;
+                try {
+                    ids = CharacterModel.getByUser(req.getSession().getAttribute("user").toString());
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                    resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    return;
+                }
+                if (!ids.contains(id)) {
                     resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Character ID not found");
+                }
                 else {
-                    Character character = characters.stream().filter(p -> p.id.equals(id)).findFirst().get();
+
+                    //Character character = characters.stream().filter(p -> p.id.equals(id)).findFirst().get();
 
                     String body = req.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
                     Map<String,?> map = gson.fromJson(body, Map.class);
@@ -143,28 +152,46 @@ public class CharacterController implements Filter {
                         return;
                     }
 
-                    character.stats.replace("str",str);
-                    character.stats.replace("dex",dex);
-                    character.stats.replace("con",con);
-                    character.stats.replace("int",intel);
-                    character.stats.replace("wis",wis);
-                    character.stats.replace("cha",cha);
-                    character.stats.replace("ac",ac);
-                    character.stats.replace("init",init);
-                    character.stats.replace("speed",speed);
-                    character.stats.replace("maxHp",maxHp);
+                    Character c;
+                    try {
+                        Set<UUID> usedIds = CharacterModel.usedIds();
+                        while(usedIds.contains(id)) {
+                            id = UUID.randomUUID();
+                        }
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
 
-                    character.name = name;
-                    character.background = bg;
-                    character.languages= languages;
-                    character.race=race;
-                    character.skillProfs= skills;
-                    character.features=features;
-                    character.toolProfs = tools;
-                    character.items=items;
-                    character.classes=classes;
-
-                    CharacterView.respond(character,resp);
+                    c = new Character(
+                            name,
+                            bg,
+                            race,
+                            languages,
+                            str,
+                            dex,
+                            con,
+                            intel,
+                            wis,
+                            cha,
+                            ac,
+                            init,
+                            speed,
+                            maxHp,
+                            skills,
+                            tools,
+                            items,
+                            features,
+                            classes,
+                            id
+                    );
+                    try {
+                        CharacterModel.put(id,c);
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                        resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                        return;
+                    }
+                    CharacterView.respond(c,resp);
                 }
             }
             case "DELETE" -> {
@@ -208,11 +235,13 @@ public class CharacterController implements Filter {
                     } catch (SQLException throwables) {
                         resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                         throwables.printStackTrace();
+                        return;
                     }
                     if (character != null)
                         CharacterView.respond(character,resp);
-                    else
+                    else {
                         resp.sendError(HttpServletResponse.SC_NOT_FOUND);
+                    }
                 }
             }
         }
@@ -220,8 +249,10 @@ public class CharacterController implements Filter {
 
     private UUID getId(String uri, HttpServletResponse resp) throws IOException {
         var split = uri.split("/");
-        if (split.length > 2)
+        if (split.length > 2) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+            return null;
+        }
         return UUID.fromString(split[split.length - 1]);
     }
 

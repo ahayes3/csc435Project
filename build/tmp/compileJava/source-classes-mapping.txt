@@ -10,8 +10,6 @@ CharacterModel.java
  CharacterModel
 LoginView.java
  LoginView
-Characters.java
- Characters
 Users.java
  Users
 LogoutServlet.java
