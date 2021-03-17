@@ -8,7 +8,6 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet("logout")
 public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

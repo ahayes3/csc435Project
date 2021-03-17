@@ -6,7 +6,7 @@ public class Clazz {
     int hitDie;
     int level;
     boolean[] savingThrows;
-    public Clazz(String name,int level) throws InvalidPropertiesFormatException {
+    public Clazz(String name,int level) {
         switch(name) {
             case "Artificer":
                 this.name = "Artificer";
@@ -75,7 +75,7 @@ public class Clazz {
                 break;
             default:
                 System.out.println("INVALID CLASS");
-                throw new InvalidPropertiesFormatException("Class " + name + " not found");
+                throw new IllegalArgumentException("Class " + name + " not found");
 
         }
         this.level=level;

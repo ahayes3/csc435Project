@@ -3,7 +3,6 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class Character {
-    String owner;
     String name,background,race,languages;
     HashMap<String,Integer> stats;
     UUID id;
@@ -32,9 +31,7 @@ public class Character {
     }};
     ArrayList<String> toolProfs,items,features;
 
-
-    public Character(String owner,String name,String background,String race,String languages,int str,int dex,int con,int intel,int wis,int cha, int ac,int init,int speed, int maxHp,ArrayList<String> skillProfs,ArrayList<String> toolProfs,ArrayList<String> items,ArrayList<String> features,ArrayList<Clazz> classes,UUID id) {
-        this.owner = owner;
+    public Character(String name,String background,String race,String languages,int str,int dex,int con,int intel,int wis,int cha, int ac,int init,int speed, int maxHp,UUID id) {
         stats = new HashMap<>();
         this.name=name;
         this.background=background;
@@ -51,6 +48,35 @@ public class Character {
         stats.put("speed",speed);
         stats.put("maxHp",maxHp);
         stats.put("hp",maxHp);
+        this.id=id;
+
+        classes=new ArrayList<>();
+        skillProfs=new ArrayList<>();
+        toolProfs=new ArrayList<>();
+        items=new ArrayList<>();
+        features=new ArrayList<>();
+    }
+    public Character(String name,String background,String race,String languages,int str,int dex,int con,int intel,int wis,int cha, int ac,int init,int speed, int maxHp,ArrayList<String> skillProfs,ArrayList<String> toolProfs,ArrayList<String> items,ArrayList<String> features,ArrayList<Clazz> classes,UUID id) {
+        stats = new HashMap<>();
+        this.name=name;
+        this.background=background;
+        this.race=race;
+        this.languages=languages;
+        stats.put("str",str);
+        stats.put("dex",dex);
+        stats.put("con",con);
+        stats.put("int",intel);
+        stats.put("wis",wis);
+        stats.put("cha",cha);
+        stats.put("ac",ac);
+        stats.put("init",init);
+        stats.put("speed",speed);
+        stats.put("maxHp",maxHp);
+        stats.put("hp",maxHp);
+
+        if(skillProfs.stream().noneMatch(p -> skills.keySet().stream().map(String::toLowerCase).allMatch(p::equals))) {
+            throw new IllegalArgumentException();
+        }
         this.skillProfs = skillProfs;
         this.toolProfs=toolProfs;
         this.items=items;
@@ -75,6 +101,24 @@ public class Character {
                 return chaMod();
         }
         return Integer.MIN_VALUE;
+    }
+    public void setSkills(ArrayList<String> s) {
+        if(s.stream().noneMatch(p -> skills.keySet().stream().map(String::toLowerCase).allMatch(p::equals))) {
+            throw new IllegalArgumentException();
+        }
+        this.skillProfs=s;
+    }
+    public void setItems(ArrayList<String> i) {
+        this.items=i;
+    }
+    public void setToolProfs(ArrayList<String> t) {
+        this.toolProfs = t;
+    }
+    public void setFeatures(ArrayList<String> f) {
+        this.features = f;
+    }
+    public void setClasses(ArrayList<Clazz> c) {
+        this.classes= c;
     }
     public int strMod(){
         return (stats.get("str")-10)/2;

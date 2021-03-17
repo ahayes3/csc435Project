@@ -1,20 +1,19 @@
-import com.google.gson.Gson;
-
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.InvalidPropertiesFormatException;
-import java.util.Map;
-import java.util.UUID;
+import java.sql.SQLException;
+import java.util.*;
 import java.util.stream.Collectors;
+import com.google.gson.Gson;
 
 @WebFilter(urlPatterns = {"/characters/*"})
 public class CharacterController implements Filter {
     private final Gson gson = new Gson();
+
+    //todo UPDATE PUT
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -63,7 +62,6 @@ public class CharacterController implements Filter {
                 }
                 Characters.usedIds.add(id);
                 c = new Character(
-                        (String) req.getSession().getAttribute("user"),
                         name,
                         bg,
                         race,
@@ -170,24 +168,45 @@ public class CharacterController implements Filter {
 
                 if (req.getSession().getAttribute("user") == null) {
                     resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-                } else if (Characters.contains(id) && Characters.get(id).owner.equals(req.getParameter("user"))) { //The one where it works
-                    Character c = Characters.remove(id);
-                    Characters.usedIds.remove(id);
-                    CharacterView.respond(c,resp);
-                } else if (Characters.contains(id)) {
-                    resp.sendError(HttpServletResponse.SC_FORBIDDEN);
                 } else {
-                    resp.sendError(HttpServletResponse.SC_NOT_FOUND);
+                    try {
+                        Set<UUID> ids = CharacterModel.getByUser(req.getSession().getAttribute("user").toString());
+                        if (ids.contains(id)) { //The one where it works
+                            Character c = CharacterModel.remove(id);
+                            CharacterModel.usedIds();
+                            CharacterView.respond(c,resp);
+                        } else if (CharacterModel.usedIds().contains(id)) {
+                            resp.sendError(HttpServletResponse.SC_FORBIDDEN);
+                        } else {
+                            resp.sendError(HttpServletResponse.SC_NOT_FOUND);
+                        }
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                        resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    }
                 }
             }
             case "GET" -> {
                 String uri = req.getRequestURI();
                 if (uri.equals("/characters")) {
-                    CharacterView.respond(Characters.list(),resp);
+                    try {
+                        CharacterView.respond(CharacterModel.getByUser(req.getSession().getAttribute("user").toString()),resp);
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                        resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    }
+                    //CharacterView.respond(Characters.list(),resp);
                 } else {
                     UUID id = getId(req.getRequestURI(), resp);
-                    if (Characters.contains(id))
-                        CharacterView.respond(Characters.get(id),resp);
+                    Character character =null;
+                    try {
+                        character = CharacterModel.get(id);
+                    } catch (SQLException throwables) {
+                        resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                        throwables.printStackTrace();
+                    }
+                    if (character != null)
+                        CharacterView.respond(character,resp);
                     else
                         resp.sendError(HttpServletResponse.SC_NOT_FOUND);
                 }
