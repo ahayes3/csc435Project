@@ -44,6 +44,49 @@ public class CharacterModel {
         System.out.println("DELETE RS has next: "+rs.next());
         return c;
     }
+    public static void post(Character c,String user) throws SQLException {
+        Connection con = connect();
+        Statement st = con.createStatement();
+        String query1 = "INSERT INTO characters(id,name,background,race,languages,str,dex,con,wis,intel,cha,ac,init,speed,maxHp VALUES ("+
+                "'"+c.id.toString()+"',"+"'"+c.name+"',"+"'"+c.background+"',"+"'"+c.race+"',"+"'"+c.languages+"',"+"'"+c.stats.get("str")+"',"
+                +"'"+c.stats.get("str")+"',"+"'"+c.stats.get("dex")+"',"+"'"+c.stats.get("con")+"',"+"'"+c.stats.get("wis")+"',"
+                +"'"+c.stats.get("intel")+"',"+"'"+c.stats.get("cha")+"',"+"'"+c.stats.get("ac")+"',"
+                +"'"+c.stats.get("init")+"',"+"'"+c.stats.get("speed")+"',"+"'"+c.stats.get("maxHp")+"')";
+        String query2 = "INSERT INTO user_characters(name,id) VALUES (" +
+                "'"+user+"',"+"'"+c.id+"')";
+        st.executeQuery(query1);
+        st.executeQuery(query2);
+
+
+        for(String f:c.features) {
+            String query3 = "INSERT IGNORE INTO character_features(id,feature) VALUES(" +
+                    "'" + c.id + "','" +f+"')";
+            st.executeQuery(query3).close();
+        }
+        for(String i:c.items) {
+            String q4 = "INSERT IGNORE INTO character_items(id,item) VALUES (" +
+                    "'"+c.id+"','"+i+"')";
+            st.executeQuery(q4).close();
+        }
+        for(String s:c.skillProfs) {
+            String q5 = "INSERT IGNORE INTO character_features(id,skill) VALUES (" +
+                    "'"+c.id+"','"+s+"')";
+            st.executeQuery(q5).close();
+        }
+        for(String t:c.toolProfs) {
+            String q6 = "INSERT IGNORE INTO character_tools(id,tool) VALUES (" +
+                    "'"+c.id+"','"+t+"')";
+            st.executeQuery(q6).close();
+        }
+        for(Clazz cl:c.classes) {
+            String q7 = "INSERT IGNORE INTO character_classes(id,classe_name,level) VALUES (" +
+                    "'"+c.id+"','"+cl.name+"','"+cl.level+"')";
+            st.executeQuery(q7).close();
+        }
+        st.close();
+        con.close();
+
+    }
     public static Set<UUID> usedIds() throws SQLException{
         Connection con  = connect();
         Statement st = con.createStatement();

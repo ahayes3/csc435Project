@@ -57,10 +57,15 @@ public class CharacterController implements Filter {
                 }
                 Character c;
                 UUID id = UUID.randomUUID();
-                while (Characters.usedIds.contains(id)) {
-                    id = UUID.randomUUID();
+                try {
+                    Set<UUID> usedIds = CharacterModel.usedIds();
+                    while(usedIds.contains(id)) {
+                        id = UUID.randomUUID();
+                    }
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
                 }
-                Characters.usedIds.add(id);
+
                 c = new Character(
                         name,
                         bg,
@@ -84,16 +89,15 @@ public class CharacterController implements Filter {
                         id
                 );
                 System.out.println("Character created with id "+id);
-                Characters.put(id,c);
-                var session = req.getSession();
-                if (session.getAttribute("characters") == null) {
-                    session.setAttribute("characters", new ArrayList<Character>());
-                    ((ArrayList<Character>) session.getAttribute("characters")).add(c);
-                    System.out.println("LSIT CRREATED");
-                } else {
-                    ((ArrayList<Character>) session.getAttribute("characters")).add(c);
-                    System.out.println("ADDED TO LSIST");
+                //update to mysql
+                try {
+                    CharacterModel.post(c,req.getSession().getAttribute("user").toString());
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                    resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 }
+
+                CharacterView.respond(c,resp);
             }
             case "PUT" -> {
                 UUID id = getId(req.getRequestURI(), resp);
