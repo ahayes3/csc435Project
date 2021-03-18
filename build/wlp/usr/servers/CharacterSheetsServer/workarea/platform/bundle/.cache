@@ -1,6 +1,7 @@
 com.ibm.ws.channelfw;1.0.48.cl210120210113-1459;false;1615776369921;741106;lib/;/home/ahayes5/cs/csc435/csc435Project/build/wlp/lib/com.ibm.ws.channelfw_1.0.48.jar
 com.ibm.ws.crypto.ltpakeyutil;1.0.48.cl210120210113-1459;false;1615776369931;31892;lib/;/home/ahayes5/cs/csc435/csc435Project/build/wlp/lib/com.ibm.ws.crypto.ltpakeyutil_1.0.48.jar
 com.ibm.ws.org.apache.felix.scr;1.0.48.cl210120210113-1459;false;1615776369958;454572;lib/;/home/ahayes5/cs/csc435/csc435Project/build/wlp/lib/com.ibm.ws.org.apache.felix.scr_1.0.48.jar
+com.ibm.websphere.javaee.activity.1.0;1.0.48.cl210120210113-1459;false;1615776369874;4444;dev/api/spec/;/home/ahayes5/cs/csc435/csc435Project/build/wlp/dev/api/spec/com.ibm.websphere.javaee.activity.1.0_1.0.48.jar
 com.ibm.ws.app.manager.war;1.0.48.cl210120210113-1459;false;1615776369911;109418;lib/;/home/ahayes5/cs/csc435/csc435Project/build/wlp/lib/com.ibm.ws.app.manager.war_1.0.48.jar
 com.ibm.ws.security.java2sec;1.0.48.cl210120210113-1459;false;1615776369961;19386;lib/;/home/ahayes5/cs/csc435/csc435Project/build/wlp/lib/com.ibm.ws.security.java2sec_1.0.48.jar
 com.ibm.ws.app.manager.module;1.0.48.cl210120210113-1459;false;1615776369911;99375;lib/;/home/ahayes5/cs/csc435/csc435Project/build/wlp/lib/com.ibm.ws.app.manager.module_1.0.48.jar
@@ -17,6 +18,7 @@ com.ibm.ws.org.apache.aries.jmx.core.whiteboard;1.0.48.cl210120210113-1459;false
 com.ibm.ws.webcontainer;1.1.48.cl210120210113-1459;false;1615776369974;1979372;lib/;/home/ahayes5/cs/csc435/csc435Project/build/wlp/lib/com.ibm.ws.webcontainer_1.1.48.jar
 com.ibm.ws.collector.manager;1.0.48.cl210120210113-1459;false;1615776369924;35574;lib/;/home/ahayes5/cs/csc435/csc435Project/build/wlp/lib/com.ibm.ws.collector.manager_1.0.48.jar
 com.ibm.ws.kernel.boot.ws-launch;1.0.48.cl210120210113-1459;false;1615776369984;2286;lib/;/home/ahayes5/cs/csc435/csc435Project/build/wlp/lib/ws-launch.jar
+com.ibm.websphere.javaee.annotation.1.3;1.0.48.cl210120210113-1459;false;1615776369874;12682;dev/api/spec/;/home/ahayes5/cs/csc435/csc435Project/build/wlp/dev/api/spec/com.ibm.websphere.javaee.annotation.1.3_1.0.48.jar
 com.ibm.ws.install;1.0.48.cl210120210113-1459;false;1615776369938;893742;lib/;/home/ahayes5/cs/csc435/csc435Project/build/wlp/lib/com.ibm.ws.install_1.0.48.jar
 com.ibm.ws.javaee.dd.ejb;1.1.48.cl210120210113-1459;false;1615776369938;32801;lib/;/home/ahayes5/cs/csc435/csc435Project/build/wlp/lib/com.ibm.ws.javaee.dd.ejb_1.1.48.jar
 com.ibm.ws.anno;1.1.48.cl210120210113-1459;false;1615776369911;1067854;lib/;/home/ahayes5/cs/csc435/csc435Project/build/wlp/lib/com.ibm.ws.anno_1.1.48.jar
@@ -29,6 +31,7 @@ com.ibm.ws.http.plugin.merge;1.0.48.cl210120210113-1459;false;1615776369934;4156
 com.ibm.ws.threading;1.1.48.cl210120210113-1459;false;1615776369964;198393;lib/;/home/ahayes5/cs/csc435/csc435Project/build/wlp/lib/com.ibm.ws.threading_1.1.48.jar
 com.ibm.ws.crypto.passwordutil;1.0.48.cl210120210113-1459;false;1615776369931;79654;lib/;/home/ahayes5/cs/csc435/csc435Project/build/wlp/lib/com.ibm.ws.crypto.passwordutil_1.0.48.jar
 com.ibm.ws.kernel.boot;1.0.48.cl210120210113-1459;false;1615776369944;779749;lib/;/home/ahayes5/cs/csc435/csc435Project/build/wlp/lib/com.ibm.ws.kernel.boot_1.0.48.jar
+com.ibm.websphere.javaee.jsonp.1.0;1.0.48.cl210120210113-1459;false;1615776369874;18409;dev/api/spec/;/home/ahayes5/cs/csc435/csc435Project/build/wlp/dev/api/spec/com.ibm.websphere.javaee.jsonp.1.0_1.0.48.jar
 com.ibm.ws.event;1.0.48.cl210120210113-1459;false;1615776369931;81932;lib/;/home/ahayes5/cs/csc435/csc435Project/build/wlp/lib/com.ibm.ws.event_1.0.48.jar
 com.ibm.ws.diagnostics;1.0.48.cl210120210113-1459;false;1615776369931;69872;lib/;/home/ahayes5/cs/csc435/csc435Project/build/wlp/lib/com.ibm.ws.diagnostics_1.0.48.jar
 com.ibm.ws.javaee.dd;1.0.48.cl210120210113-1459;false;1615776369938;82308;lib/;/home/ahayes5/cs/csc435/csc435Project/build/wlp/lib/com.ibm.ws.javaee.dd_1.0.48.jar
@@ -88,6 +91,7 @@ com.ibm.ws.artifact.loose;1.0.48.cl210120210113-1459;false;1615776369914;68508;l
 com.ibm.ws.classloading;1.1.48.cl210120210113-1459;false;1615776369924;429527;lib/;/home/ahayes5/cs/csc435/csc435Project/build/wlp/lib/com.ibm.ws.classloading_1.1.48.jar
 com.ibm.ws.javaee.dd.common;1.1.48.cl210120210113-1459;false;1615776369938;22232;lib/;/home/ahayes5/cs/csc435/csc435Project/build/wlp/lib/com.ibm.ws.javaee.dd.common_1.1.48.jar
 com.ibm.ws.config;1.0.48.cl210120210113-1459;false;1615776369928;759081;lib/;/home/ahayes5/cs/csc435/csc435Project/build/wlp/lib/com.ibm.ws.config_1.0.48.jar
+com.ibm.websphere.javaee.servlet.4.0;1.0.48.cl210120210113-1459;false;1615776369878;112456;dev/api/spec/;/home/ahayes5/cs/csc435/csc435Project/build/wlp/dev/api/spec/com.ibm.websphere.javaee.servlet.4.0_1.0.48.jar
 com.ibm.websphere.security;1.1.48.cl210120210113-1459;false;1615776369908;102936;lib/;/home/ahayes5/cs/csc435/csc435Project/build/wlp/lib/com.ibm.websphere.security_1.1.48.jar
 com.ibm.ws.artifact.overlay;1.0.48.cl210120210113-1459;false;1615776369914;49273;lib/;/home/ahayes5/cs/csc435/csc435Project/build/wlp/lib/com.ibm.ws.artifact.overlay_1.0.48.jar
 com.ibm.ws.security.utility;1.0.48.cl210120210113-1459;false;1615776369961;141345;lib/;/home/ahayes5/cs/csc435/csc435Project/build/wlp/lib/com.ibm.ws.security.utility_1.0.48.jar

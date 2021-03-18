@@ -1,0 +1,6 @@
+
+ Index  Count  Time of first Occurrence    Time of last Occurrence     Exception SourceId ProbeId
+------+------+---------------------------+---------------------------+---------------------------
+     0      2   3/17/21, 18:05:15:026 EDT   3/17/21, 18:07:42:456 EDT com.google.gson.JsonSyntaxException com.ibm.ws.webcontainer.filter.WebAppFilterManager.invokeFilters 1105
+                                                                            - /home/ahayes5/cs/csc435/csc435Project/build/wlp/usr/servers/CharacterSheetsServer/logs/ffdc/ffdc_21.03.17_18.05.15.0.log
+------+------+---------------------------+---------------------------+---------------------------

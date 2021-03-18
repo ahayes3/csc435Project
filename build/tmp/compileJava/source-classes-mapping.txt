@@ -2,16 +2,18 @@ CharacterController.java
  CharacterController
 Clazz.java
  Clazz
+UserModel.java
+ UserModel
 LoginController.java
  LoginController
 CharacterView.java
  CharacterView
 CharacterModel.java
  CharacterModel
+Utils.java
+ Utils
 LoginView.java
  LoginView
-Users.java
- Users
 LogoutServlet.java
  LogoutServlet
 Ability.java

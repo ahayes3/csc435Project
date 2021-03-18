@@ -65,7 +65,7 @@ public class Character {
         stats.put("str",str);
         stats.put("dex",dex);
         stats.put("con",con);
-        stats.put("int",intel);
+        stats.put("intel",intel);
         stats.put("wis",wis);
         stats.put("cha",cha);
         stats.put("ac",ac);
@@ -74,9 +74,6 @@ public class Character {
         stats.put("maxHp",maxHp);
         stats.put("hp",maxHp);
 
-        if(skillProfs.stream().noneMatch(p -> skills.keySet().stream().map(String::toLowerCase).allMatch(p::equals))) {
-            throw new IllegalArgumentException();
-        }
         this.skillProfs = skillProfs;
         this.toolProfs=toolProfs;
         this.items=items;
@@ -103,10 +100,8 @@ public class Character {
         return Integer.MIN_VALUE;
     }
     public void setSkills(ArrayList<String> s) {
-        if(s.stream().noneMatch(p -> skills.keySet().stream().map(String::toLowerCase).allMatch(p::equals))) {
-            throw new IllegalArgumentException();
-        }
-        this.skillProfs=s;
+        if(s!=null)
+            this.skillProfs=s;
     }
     public void setItems(ArrayList<String> i) {
         this.items=i;

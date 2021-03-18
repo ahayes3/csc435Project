@@ -7,68 +7,68 @@ public class Clazz {
     int level;
     boolean[] savingThrows;
     public Clazz(String name,int level) {
-        switch(name) {
-            case "Artificer":
+        switch(name.toLowerCase()) {
+            case "artificer":
                 this.name = "Artificer";
                 this.hitDie = 8;
                 this.savingThrows = new boolean[]{false, false, true, true, false, false};
                 break;
-            case "Barbarian":
+            case "barbarian":
                 this.name = "Barbarian";
                 this.hitDie = 12;
                 this.savingThrows = new boolean[]{true, false, true, false, false, false};
                 break;
-            case "Bard":
+            case "bard":
                 this.name = "Bard";
                 this.hitDie = 8;
                 this.savingThrows = new boolean[]{false, true, false, false, false, true};
                 break;
-            case "Cleric":
+            case "cleric":
                 this.name = "Cleric";
                 this.hitDie = 8;
                 this.savingThrows = new boolean[]{false, false, false, false, true, true};
                 break;
-            case "Druid":
+            case "druid":
                 this.name = "Druid";
                 this.hitDie = 8;
                 this.savingThrows = new boolean[]{false, false, false, true, true, false};
                 break;
-            case "Fighter":
+            case "fighter":
                 this.name = "Fighter";
                 this.hitDie = 10;
                 this.savingThrows = new boolean[]{true, false, true, false, false, false};
                 break;
-            case "Monk":
+            case "monk":
                 this.name = "Monk";
                 this.hitDie = 8;
                 this.savingThrows = new boolean[]{true, true, false, false, false, false};
                 break;
-            case "Paladin":
+            case "paladin":
                 this.name = "Paladin";
                 this.hitDie = 10;
                 this.savingThrows = new boolean[]{false, false, false, false, true, true};
                 break;
-            case "Ranger":
+            case "ranger":
                 this.name = "Ranger";
                 this.hitDie = 10;
                 this.savingThrows = new boolean[]{true, true, false, false, false, false};
                 break;
-            case "Rogue":
+            case "rogue":
                 this.name = "Rogue";
                 this.hitDie = 8;
                 this.savingThrows = new boolean[]{false, true, false, true, false, false};
                 break;
-            case "Sorcerer":
+            case "sorcerer":
                 this.name = "Sorcerer";
                 this.hitDie = 6;
                 this.savingThrows = new boolean[]{false, false, true, false, false, true};
                 break;
-            case "Warlock":
+            case "warlock":
                 this.name = "Warlock";
                 this.hitDie = 8;
                 this.savingThrows = new boolean[]{false, false, false, false, true, true};
                 break;
-            case "Wizard":
+            case "wizard":
                 this.name = "Wizard";
                 this.hitDie = 6;
                 this.savingThrows = new boolean[]{false, false, false, true, true, false};

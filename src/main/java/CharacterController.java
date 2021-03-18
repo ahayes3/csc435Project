@@ -21,6 +21,8 @@ public class CharacterController implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
         switch (req.getMethod()) {
             case "POST" -> {
+                System.out.println("USER "+req.getSession().getAttribute("user"));
+
                 String body = req.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
                 Map<String,?> map = gson.fromJson(body, Map.class);
                 int str, dex, con, intel, wis, cha, ac, init, speed, maxHp;
@@ -29,12 +31,11 @@ public class CharacterController implements Filter {
                 ArrayList<String> skills,tools,features,items;
                 ArrayList<Clazz> classes;
                 try {
-                    charObj = (Map<String,?>) map.get("character");
-                    charObj.keySet().forEach(System.out::println);
+                    charObj = (Map<String, ?>) map.get("character");
                     str = ((Double) charObj.get("str")).intValue();
                     dex = ((Double) charObj.get("dex")).intValue();
                     con = ((Double) charObj.get("con")).intValue();
-                    intel = ((Double) charObj.get("int")).intValue();
+                    intel = ((Double) charObj.get("intel")).intValue();
                     wis = ((Double) charObj.get("wis")).intValue();
                     cha = ((Double) charObj.get("cha")).intValue();
                     ac = ((Double) charObj.get("ac")).intValue();
@@ -50,12 +51,14 @@ public class CharacterController implements Filter {
                     items = makeList(charObj,"items");
                     skills = makeList(charObj,"skills");
                     classes = classesList(charObj);
+                    System.out.println("INTEL " +intel );
                 }
                 catch(NullPointerException e) {
                     resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
                     return;
                 }
                 Character c;
+
                 UUID id = UUID.randomUUID();
                 try {
                     Set<UUID> usedIds = CharacterModel.usedIds();
@@ -89,8 +92,13 @@ public class CharacterController implements Filter {
                         id
                 );
                 System.out.println("Character created with id "+id);
+                System.out.println(c.skillProfs);
                 //update to mysql
                 try {
+                    if(req.getSession().getAttribute("user")==null) {
+                        resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+                        return;
+                    }
                     CharacterModel.post(c,req.getSession().getAttribute("user").toString());
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
@@ -102,6 +110,9 @@ public class CharacterController implements Filter {
             }
             case "PUT" -> {
                 UUID id = getId(req.getRequestURI(), resp);
+                System.out.println("ENETERED ID "+id);
+                if(id==null)
+                    return;
                 Set<UUID> ids=null;
                 try {
                     ids = CharacterModel.getByUser(req.getSession().getAttribute("user").toString());
@@ -112,6 +123,7 @@ public class CharacterController implements Filter {
                 }
                 if (!ids.contains(id)) {
                     resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Character ID not found");
+                    return;
                 }
                 else {
 
@@ -130,7 +142,7 @@ public class CharacterController implements Filter {
                         str = ((Double) charObj.get("str")).intValue();
                         dex = ((Double) charObj.get("dex")).intValue();
                         con = ((Double) charObj.get("con")).intValue();
-                        intel = ((Double) charObj.get("int")).intValue();
+                        intel = ((Double) charObj.get("intel")).intValue();
                         wis = ((Double) charObj.get("wis")).intValue();
                         cha = ((Double) charObj.get("cha")).intValue();
                         ac = ((Double) charObj.get("ac")).intValue();
@@ -153,14 +165,6 @@ public class CharacterController implements Filter {
                     }
 
                     Character c;
-                    try {
-                        Set<UUID> usedIds = CharacterModel.usedIds();
-                        while(usedIds.contains(id)) {
-                            id = UUID.randomUUID();
-                        }
-                    } catch (SQLException throwables) {
-                        throwables.printStackTrace();
-                    }
 
                     c = new Character(
                             name,
@@ -249,7 +253,8 @@ public class CharacterController implements Filter {
 
     private UUID getId(String uri, HttpServletResponse resp) throws IOException {
         var split = uri.split("/");
-        if (split.length > 2) {
+        if (split.length > 3) {
+            System.out.println("HERE");
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
             return null;
         }

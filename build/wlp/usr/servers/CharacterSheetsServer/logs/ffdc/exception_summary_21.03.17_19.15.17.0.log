@@ -1,0 +1,17 @@
+
+ Index  Count  Time of first Occurrence    Time of last Occurrence     Exception SourceId ProbeId
+------+------+---------------------------+---------------------------+---------------------------
+     0     11   3/17/21, 19:15:17:731 EDT   3/17/21, 19:30:31:157 EDT com.google.gson.JsonSyntaxException com.ibm.ws.webcontainer.filter.WebAppFilterManager.invokeFilters 1105
+                                                                            - /home/ahayes5/cs/csc435/csc435Project/build/wlp/usr/servers/CharacterSheetsServer/logs/ffdc/ffdc_21.03.17_19.15.17.0.log
+     1      4   3/17/21, 19:31:11:189 EDT   3/17/21, 21:33:11:813 EDT java.lang.IllegalArgumentException com.ibm.ws.webcontainer.filter.WebAppFilterManager.invokeFilters 1105
+                                                                            - /home/ahayes5/cs/csc435/csc435Project/build/wlp/usr/servers/CharacterSheetsServer/logs/ffdc/ffdc_21.03.17_19.31.11.0.log
+                                                                            - /home/ahayes5/cs/csc435/csc435Project/build/wlp/usr/servers/CharacterSheetsServer/logs/ffdc/ffdc_21.03.17_20.35.51.0.log
+                                                                            - /home/ahayes5/cs/csc435/csc435Project/build/wlp/usr/servers/CharacterSheetsServer/logs/ffdc/ffdc_21.03.17_19.33.22.0.log
+     2      4   3/17/21, 19:36:54:374 EDT   3/17/21, 21:23:57:809 EDT java.lang.NullPointerException com.ibm.ws.webcontainer.filter.WebAppFilterManager.invokeFilters 1105
+                                                                            - /home/ahayes5/cs/csc435/csc435Project/build/wlp/usr/servers/CharacterSheetsServer/logs/ffdc/ffdc_21.03.17_19.36.54.0.log
+                                                                            - /home/ahayes5/cs/csc435/csc435Project/build/wlp/usr/servers/CharacterSheetsServer/logs/ffdc/ffdc_21.03.17_19.45.14.0.log
+                                                                            - /home/ahayes5/cs/csc435/csc435Project/build/wlp/usr/servers/CharacterSheetsServer/logs/ffdc/ffdc_21.03.17_21.19.01.0.log
+                                                                            - /home/ahayes5/cs/csc435/csc435Project/build/wlp/usr/servers/CharacterSheetsServer/logs/ffdc/ffdc_21.03.17_21.23.57.0.log
+     3      3   3/17/21, 20:40:01:802 EDT   3/17/21, 20:49:35:684 EDT java.lang.IllegalStateException com.ibm.ws.webcontainer.filter.WebAppFilterManager.invokeFilters 1105
+                                                                            - /home/ahayes5/cs/csc435/csc435Project/build/wlp/usr/servers/CharacterSheetsServer/logs/ffdc/ffdc_21.03.17_20.40.01.0.log
+------+------+---------------------------+---------------------------+---------------------------

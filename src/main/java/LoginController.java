@@ -1,3 +1,5 @@
+import com.google.gson.Gson;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,64 +11,75 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.sql.SQLException;
+import java.util.Map;
 import java.util.Scanner;
-//Can be trimmed down
-//Will include better auth for viewing private/public sheets
-// and editing owned sheets
+import java.util.stream.Collectors;
+
+//Takes a json object with user and pass keys as input
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
-    @Override
-    public void init() throws ServletException {
-        super.init();
-        File users = new File("users.txt");  //plain text passwords :)
-        if(users.exists()) {
-            users.delete();
-            try {
-                users.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     @Override // create account
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        File file = new File("users.txt");
-        if(req.getSession().getAttribute("user")!= null) {
-            resp.sendError(HttpServletResponse.SC_EXPECTATION_FAILED);
-        }
-        String user = req.getParameter("user");
-        String pass = req.getParameter("pass");
 
-        Scanner s = new Scanner(file);
-        int i=0;
-        while(s.hasNextLine()) {
-            if(s.nextLine().equals(user) && i%2==0) {
-                resp.sendError(HttpServletResponse.SC_CONFLICT,"Username "+ user+" already exists.");
-                return;
-            }
-            i++;
-        }
-        FileWriter f = new FileWriter(file);
-        f.append(user).append('\n');
-        f.append(pass).append('\n');
-        req.getSession().setAttribute("user",user);
-        f.flush();
-        f.close();
+        String body = req.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+        System.out.println("BODY: " + body);
+        Map<String,?> map = new Gson().fromJson(body, Map.class);
 
-        s.close();
+        Object o1,o2;
+
+        o1 = map.get("user");
+        o2 = map.get("pass");
+
+        if(o1 ==null || o2 == null) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
+        String user = o1.toString();
+        String pass = o2.toString();
+
+        try {
+            if (!UserModel.post(user, pass))
+                resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Username taken");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return;
+        }
+        req.getSession().setAttribute("user", user);
     }
 
     @Override  //login
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        if(req.getSession().getAttribute("user")!= null) {
-            resp.sendError(HttpServletResponse.SC_EXPECTATION_FAILED);
-        }
-        String user = req.getParameter("user");
-        String pass =req.getParameter("pass");
-        boolean success = Users.login(user,pass);
+        String body = req.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+        Map<String,?> map = new Gson().fromJson(body, Map.class);
 
-        LoginView.respond(success,resp);
+        Object o1,o2;
+
+        o1 = map.get("user");
+        o2 = map.get("pass");
+
+        if(o1 ==null || o2 == null) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
+        String user = o1.toString();
+        String pass = o2.toString();
+
+        if(user==null || pass == null) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
+        try {
+            UserModel.put(user, pass);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return;
+        }
+        System.out.println("LOGIN USER " + user);
+        req.getSession().setAttribute("user", user);
     }
 }
 
